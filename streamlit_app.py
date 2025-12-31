@@ -8,33 +8,6 @@ st.set_page_config(
     layout="wide"
 )
 
-st.session_state.setdefault("logged_in", False)
-
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
-
-USERNAME = "admin"
-PASSWORD_HASH = hash_password("2694")
-
-def login():
-    st.title("🔐 Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-
-    if st.button("Login"):
-        if username == USERNAME and hash_password(password) == PASSWORD_HASH:
-            st.session_state.logged_in = True
-            st.rerun()
-        else:
-            st.error("❌ Invalid username or password")
-
-if not st.session_state.logged_in:
-    login()
-    st.stop()
-
-if st.sidebar.button("🚪 Logout"):
-    st.session_state.logged_in = False
-    st.rerun()
 
 # Initialize session state
 if "trades" not in st.session_state:
